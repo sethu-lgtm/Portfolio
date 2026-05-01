@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sethu Madhav — Data Analyst Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:    #070a0f;
+    --bg2:   #0c1018;
+    --bg3:   #131720;
+    --amber: #f0a500;
+    --amber-glow: rgba(240,165,0,0.12);
+    --teal:  #2dd4bf;
+    --text:  #e2ddd4;
+    --muted: #6b6a62;
+    --border: rgba(255,255,255,0.06);
+    --border-amber: rgba(240,165,0,0.22);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  #cdot { position:fixed; top:0; left:0; width:7px; height:7px; background:var(--amber); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition: width .18s, height .18s; }
+  #cring { position:fixed; top:0; left:0; width:34px; height:34px; border:1px solid rgba(240,165,0,.45); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition: width .12s, height .12s; }
+
+  .gbg {
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image: linear-gradient(rgba(240,165,0,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(240,165,0,.028) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.4rem 4rem;
+    background:rgba(7,10,15,.88); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo { font-family:'DM Mono',monospace; font-size:13px; letter-spacing:.16em; color:var(--amber); text-transform:uppercase; }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; color:var(--muted); text-decoration:none; text-transform:uppercase; transition:color .2s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-cta { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; color:var(--bg); background:var(--amber); padding:.55rem 1.3rem; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.85; }
+
+  #hero {
+    position:relative; z-index:2;
+    min-height:100vh; display:flex; align-items:center;
+    padding:9rem 4rem 5rem; border-bottom:1px solid var(--border);
+  }
+  .hero-inner { max-width:1200px; width:100%; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+
+  .hero-badge { display:inline-flex; align-items:center; gap:.6rem; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--amber); text-transform:uppercase; margin-bottom:1.75rem; }
+  .bdot { width:7px; height:7px; background:var(--amber); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+  .hero-name { font-family:'DM Serif Display',serif; font-size:clamp(3.2rem,5.5vw,6rem); line-height:1.0; font-weight:400; color:var(--text); }
+  .hero-name em { font-style:italic; color:var(--amber); }
+  .hero-role { font-family:'DM Mono',monospace; font-size:13px; font-weight:300; color:var(--muted); letter-spacing:.08em; margin-top:1.25rem; margin-bottom:2rem; }
+  .hero-desc { font-size:16px; font-weight:300; color:rgba(226,221,212,.68); max-width:440px; line-height:1.9; margin-bottom:2.75rem; }
+  .hero-actions { display:flex; gap:1rem; align-items:center; }
+
+  .btn-primary { display:inline-block; background:var(--amber); color:var(--bg); font-family:'DM Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; padding:1rem 2rem; transition:opacity .2s; }
+  .btn-primary:hover { opacity:.85; }
+  .btn-ghost { display:inline-block; color:var(--muted); font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; padding:1rem 2rem; border:1px solid var(--border); transition:all .2s; }
+  .btn-ghost:hover { border-color:var(--amber); color:var(--amber); }
+
+  .hero-visual { display:flex; align-items:center; justify-content:center; }
+  .hero-frame { position:relative; width:360px; height:460px; }
+  .hero-avatar { width:100%; height:100%; background:var(--bg3); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .av-mono { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--muted); margin-bottom:.6rem; }
+  .av-init { font-family:'DM Serif Display',serif; font-size:5.5rem; font-style:italic; color:var(--amber); opacity:.16; }
+  .av-grid { position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,transparent,transparent 23px,rgba(240,165,0,.04) 23px,rgba(240,165,0,.04) 24px),repeating-linear-gradient(90deg,transparent,transparent 23px,rgba(240,165,0,.04) 23px,rgba(240,165,0,.04) 24px); }
+  .av-bot { position:absolute; bottom:1.25rem; left:1.25rem; right:1.25rem; display:flex; justify-content:space-between; align-items:flex-end; }
+  .av-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--amber); text-transform:uppercase; }
+  .av-num { font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--amber); line-height:1; }
+  .av-numlbl { font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+
+  .corner { position:absolute; width:18px; height:18px; }
+  .ctl { top:-1px; left:-1px; border-top:2px solid var(--amber); border-left:2px solid var(--amber); }
+  .cbr { bottom:-1px; right:-1px; border-bottom:2px solid var(--amber); border-right:2px solid var(--amber); }
+
+  .hero-stat { position:absolute; bottom:-1.5rem; right:-2rem; background:var(--bg2); border:1px solid var(--border-amber); padding:1.25rem 1.5rem; }
+  .stat-n { font-family:'DM Serif Display',serif; font-size:2.4rem; color:var(--amber); line-height:1; }
+  .stat-l { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.15em; color:var(--muted); text-transform:uppercase; }
+
+  .kolam { position:absolute; right:3.5rem; top:50%; transform:translateY(-50%); opacity:.05; pointer-events:none; }
+
+  section { position:relative; z-index:2; }
+  .si { max-width:1200px; margin:0 auto; padding:6rem 4rem; }
+  .sh { display:flex; align-items:baseline; gap:1.5rem; margin-bottom:3.5rem; }
+  .snum { font-family:'DM Mono',monospace; font-size:11px; color:var(--amber); letter-spacing:.15em; }
+  .stitle { font-family:'DM Serif Display',serif; font-size:2.75rem; font-weight:400; color:var(--text); }
+  .sline { flex:1; height:1px; background:var(--border); margin-bottom:.3rem; }
+
+  #about { border-bottom:1px solid var(--border); }
+  .ag { display:grid; grid-template-columns:1.3fr 1fr; gap:6rem; align-items:start; }
+  .at p { font-size:16px; font-weight:300; color:rgba(226,221,212,.72); line-height:1.95; margin-bottom:1.5rem; }
+  .at p strong { font-weight:600; color:var(--text); }
+  .at .hl { color:var(--amber); font-weight:500; }
+
+  .skills { display:flex; flex-direction:column; gap:1.6rem; }
+  .sr { display:flex; flex-direction:column; gap:.45rem; }
+  .st { display:flex; justify-content:space-between; }
+  .sn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--muted); text-transform:uppercase; }
+  .sp { font-family:'DM Mono',monospace; font-size:11px; color:var(--amber); }
+  .bb { height:2px; background:var(--border); position:relative; overflow:hidden; }
+  .bf { position:absolute; top:0; left:0; height:100%; background:linear-gradient(90deg,var(--teal),var(--amber)); transform:scaleX(0); transform-origin:left; transition:transform 1.3s cubic-bezier(.16,1,.3,1); }
+  .bf.on { transform:scaleX(1); }
+
+  #projects { background:var(--bg2); border-bottom:1px solid var(--border); }
+  .pgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:var(--border); border:1px solid var(--border); }
+  .pc { background:var(--bg); padding:2.25rem; display:flex; flex-direction:column; position:relative; overflow:hidden; transition:background .3s; cursor:none; }
+  .pc:hover { background:var(--bg3); }
+  .pc::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--amber),var(--teal)); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+  .pc:hover::after { transform:scaleX(1); }
+  .ptag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.15em; color:var(--amber); text-transform:uppercase; margin-bottom:.75rem; }
+  .pname { font-family:'DM Serif Display',serif; font-size:1.42rem; font-weight:400; color:var(--text); margin-bottom:.75rem; line-height:1.25; }
+  .pdesc { font-size:13.5px; font-weight:300; color:var(--muted); line-height:1.8; flex:1; margin-bottom:1.5rem; }
+  .ptech { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.4rem; }
+  .chip { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--teal); border:1px solid rgba(45,212,191,.22); padding:.2rem .55rem; text-transform:uppercase; }
+  .plink { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--muted); text-decoration:none; text-transform:uppercase; display:flex; align-items:center; gap:.45rem; transition:color .2s; }
+  .plink:hover { color:var(--amber); }
+  .plink span { transition:transform .2s; }
+  .plink:hover span { transform:translate(3px,-3px); }
+
+  #experience { border-bottom:1px solid var(--border); }
+  .el { display:flex; flex-direction:column; }
+  .ei { display:grid; grid-template-columns:190px 1fr; padding:2.5rem 0; border-bottom:1px solid var(--border); position:relative; }
+  .ed { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; padding-top:.25rem; }
+  .ediv { position:absolute; left:190px; top:0; bottom:0; width:1px; background:var(--border); }
+  .eb { padding-left:2rem; }
+  .er { font-family:'DM Serif Display',serif; font-size:1.35rem; font-weight:400; color:var(--text); margin-bottom:.2rem; }
+  .ec { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--amber); text-transform:uppercase; margin-bottom:.85rem; }
+  .ebull { list-style:none; display:flex; flex-direction:column; gap:.55rem; }
+  .ebull li { font-size:13.5px; font-weight:300; color:var(--muted); line-height:1.7; padding-left:.9rem; position:relative; }
+  .ebull li::before { content:'—'; position:absolute; left:0; color:var(--amber); font-size:11px; }
+
+  #tools { background:var(--bg2); border-bottom:1px solid var(--border); }
+  .tgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); }
+  .tc { background:var(--bg); padding:1.75rem 1.5rem; display:flex; flex-direction:column; gap:.4rem; transition:background .2s; }
+  .tc:hover { background:var(--bg3); }
+  .ti { font-size:1.3rem; margin-bottom:.15rem; }
+  .tn { font-family:'DM Mono',monospace; font-size:12px; font-weight:500; color:var(--text); }
+  .tcat { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+
+  #contact { border-bottom:1px solid var(--border); }
+  .ci { max-width:1200px; margin:0 auto; padding:6rem 4rem; display:grid; grid-template-columns:1fr 1fr; gap:7rem; }
+  .ch { font-family:'DM Serif Display',serif; font-size:clamp(2.2rem,3.5vw,3.5rem); font-weight:400; line-height:1.1; margin-bottom:1.25rem; }
+  .ch em { font-style:italic; color:var(--amber); }
+  .csub { font-size:15px; font-weight:300; color:var(--muted); line-height:1.85; margin-bottom:2rem; }
+  .cls { display:flex; flex-direction:column; gap:.85rem; }
+  .cl { display:flex; align-items:center; gap:1rem; text-decoration:none; padding:.9rem 1.1rem; border:1px solid var(--border); transition:all .2s; }
+  .cl:hover { border-color:var(--amber); background:var(--amber-glow); }
+  .cli { font-family:'DM Mono',monospace; font-size:11px; color:var(--amber); width:1.4rem; }
+  .clt { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.06em; color:var(--muted); }
+  .cl:hover .clt { color:var(--text); }
+
+  .cform { display:flex; flex-direction:column; gap:1.1rem; }
+  .frow { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+  .ff { display:flex; flex-direction:column; gap:.4rem; }
+  .ff label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.15em; color:var(--muted); text-transform:uppercase; }
+  .ff input, .ff textarea { background:var(--bg2); border:1px solid var(--border); color:var(--text); font-family:'Outfit',sans-serif; font-size:14px; font-weight:300; padding:.8rem 1rem; outline:none; resize:none; transition:border-color .2s; }
+  .ff input:focus, .ff textarea:focus { border-color:var(--amber); }
+  .ff textarea { min-height:110px; }
+  .fsub { background:var(--amber); color:var(--bg); border:none; font-family:'DM Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.15em; text-transform:uppercase; padding:1rem 2rem; cursor:none; transition:opacity .2s; align-self:flex-start; }
+  .fsub:hover { opacity:.85; }
+
+  footer { position:relative; z-index:2; border-top:1px solid var(--border); padding:1.4rem 4rem; display:flex; justify-content:space-between; align-items:center; }
+  .fcopy { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; }
+  .ftag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--amber); text-transform:uppercase; }
+
+  .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  ::-webkit-scrollbar { width:3px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:rgba(240,165,0,.4); }
+
+  @media(max-width:900px){
+    nav { padding:1.25rem 2rem; }
+    .nav-links { display:none; }
+    #hero,.si,.ci { padding:5rem 2rem 3rem; }
+    .hero-inner,.ag,.pgrid { grid-template-columns:1fr; }
+    .hero-visual { display:none; }
+    .ei { grid-template-columns:1fr; }
+    .ediv { display:none; }
+    .eb { padding-left:0; padding-top:.75rem; }
+    footer { flex-direction:column; gap:.5rem; }
+    .frow { grid-template-columns:1fr; }
+    .ci { padding:4rem 2rem; gap:3rem; grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cdot"></div>
+<div id="cring"></div>
+<div class="gbg"></div>
+
+<nav>
+  <span class="nav-logo">SM.</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Journey</a></li>
+    <li><a href="#tools">Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://www.linkedin.com/in/sethu-755185217" target="_blank" class="nav-cta">LinkedIn ↗</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="bdot"></span>Open to Opportunities</div>
+      <h1 class="hero-name">Sethu<br><em>Madhav</em></h1>
+      <p class="hero-role">Data Analyst &amp; Aspiring AI Builder &nbsp;·&nbsp; vijayawada, India</p>
+      <p class="hero-desc">Self-taught data analyst turning raw data into clarity. From SQL queries on real e-commerce datasets to Python-powered EDA — I build with curiosity and ship with purpose.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">See My Work</a>
+        <a href="https://github.com/sethu-lgtm" target="_blank" class="btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-frame">
+        <div class="hero-avatar">
+          <div class="av-grid"></div>
+          <p class="av-mono">github.com/sethu-lgtm</p>
+          <div class="av-init">SM</div>
+          <div class="av-bot">
+            <div><div class="av-num">5</div><div class="av-numlbl">Repositories</div></div>
+            <div class="av-label">Self-Taught</div>
+          </div>
+        </div>
+        <div class="corner ctl"></div>
+        <div class="corner cbr"></div>
+        <div class="hero-stat">
+          <div class="stat-n">3+</div>
+          <div class="stat-l">Projects Live</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg class="kolam" width="300" height="300" viewBox="0 0 300 300" fill="none">
+    <circle cx="150" cy="150" r="140" stroke="#f0a500" stroke-width=".5"/>
+    <circle cx="150" cy="150" r="110" stroke="#f0a500" stroke-width=".5"/>
+    <circle cx="150" cy="150" r="80" stroke="#f0a500" stroke-width=".5"/>
+    <circle cx="150" cy="150" r="50" stroke="#f0a500" stroke-width=".5"/>
+    <circle cx="150" cy="150" r="20" stroke="#f0a500" stroke-width=".5"/>
+    <line x1="10" y1="150" x2="290" y2="150" stroke="#f0a500" stroke-width=".5"/>
+    <line x1="150" y1="10" x2="150" y2="290" stroke="#f0a500" stroke-width=".5"/>
+    <line x1="51" y1="51" x2="249" y2="249" stroke="#f0a500" stroke-width=".5"/>
+    <line x1="249" y1="51" x2="51" y2="249" stroke="#f0a500" stroke-width=".5"/>
+    <circle cx="150" cy="10" r="3" fill="#f0a500"/><circle cx="150" cy="290" r="3" fill="#f0a500"/>
+    <circle cx="10" cy="150" r="3" fill="#f0a500"/><circle cx="290" cy="150" r="3" fill="#f0a500"/>
+    <circle cx="51" cy="51" r="3" fill="#f0a500"/><circle cx="249" cy="249" r="3" fill="#f0a500"/>
+    <circle cx="249" cy="51" r="3" fill="#f0a500"/><circle cx="51" cy="249" r="3" fill="#f0a500"/>
+  </svg>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="si">
+    <div class="sh reveal"><span class="snum">01</span><h2 class="stitle">About</h2><div class="sline"></div></div>
+    <div class="ag">
+      <div class="at reveal">
+        <p>I'm <strong>Sethu Madhav</strong> — a self-taught data analyst from vijayawada with a genuine passion for making data useful. My journey started with curiosity and an internet connection, not a classroom.</p>
+        <p>I've built projects end-to-end: <span class="hl">SQL analysis on Zepto's product catalogue</span>, <span class="hl">Python EDA pipelines</span>, and a <span class="hl">gender classification model</span> tackling the unique challenge of Indian name ambiguity.</p>
+        <p>Currently expanding into <strong>AI-powered analytics</strong> — building systems that automate the analyst's entire workflow so businesses can get answers, not just data dumps.</p>
+      </div>
+      <div class="skills reveal">
+        <div class="sr"><div class="st"><span class="sn">SQL &amp; Databases</span><span class="sp">90%</span></div><div class="bb"><div class="bf" data-w=".90"></div></div></div>
+        <div class="sr"><div class="st"><span class="sn">Python (Pandas / NumPy)</span><span class="sp">82%</span></div><div class="bb"><div class="bf" data-w=".82"></div></div></div>
+        <div class="sr"><div class="st"><span class="sn">Data Cleaning &amp; EDA</span><span class="sp">88%</span></div><div class="bb"><div class="bf" data-w=".88"></div></div></div>
+        <div class="sr"><div class="st"><span class="sn">Data Visualisation</span><span class="sp">78%</span></div><div class="bb"><div class="bf" data-w=".78"></div></div></div>
+        <div class="sr"><div class="st"><span class="sn">HTML / CSS / JS</span><span class="sp">72%</span></div><div class="bb"><div class="bf" data-w=".72"></div></div></div>
+        <div class="sr"><div class="st"><span class="sn">AI &amp; LLM Integration</span><span class="sp">85%</span></div><div class="bb"><div class="bf" data-w=".65"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS — Real GitHub repos -->
+<section id="projects">
+  <div class="si">
+    <div class="sh reveal"><span class="snum">02</span><h2 class="stitle">Projects</h2><div class="sline"></div></div>
+    <div class="pgrid reveal">
+
+      <div class="pc">
+        <span class="ptag">SQL · E-Commerce Analysis</span>
+        <h3 class="pname">Zepto Products SQL Analysis</h3>
+        <p class="pdesc">End-to-end SQL analysis of Zepto's product catalogue answering 13+ real business questions — top &amp; cheapest products by MRP, category distribution, average pricing per segment, and discount insights on a live quick-commerce dataset.</p>
+        <div class="ptech"><span class="chip">MySQL</span><span class="chip">SQL</span><span class="chip">Data Analysis</span></div>
+        <a href="https://github.com/sethu-lgtm/Zepto_products_sql_queries" target="_blank" class="plink">View on GitHub <span>↗</span></a>
+      </div>
+
+      <div class="pc">
+        <span class="ptag">Python · EDA · Data Quality</span>
+        <h3 class="pname">Data Cleaning &amp; EDA Pipeline</h3>
+        <p class="pdesc">Systematic data cleaning and exploratory analysis using Python. Handled missing values, duplicates, type mismatches, and outliers (IQR). Conducted univariate, bivariate, and multivariate analysis to surface correlations and business-ready insights.</p>
+        <div class="ptech"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Jupyter</span></div>
+        <a href="https://github.com/sethu-lgtm/Data-cleaning-and-EDA" target="_blank" class="plink">View on GitHub <span>↗</span></a>
+      </div>
+
+      <div class="pc">
+        <span class="ptag">Python · ML · Classification</span>
+        <h3 class="pname">Gender Prediction from Names</h3>
+        <p class="pdesc">Data preprocessing and gender classification for Indian customer datasets. Cleaned raw Excel name data, extracted first names, and applied gender_guesser — tackling the unique challenge of Indian name ambiguity that Western libraries struggle with.</p>
+        <div class="ptech"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">openpyxl</span><span class="chip">gender_guesser</span></div>
+        <a href="https://github.com/sethu-lgtm/Python-Gender-prediction-from-names-project" target="_blank" class="plink">View on GitHub <span>↗</span></a>
+      </div>
+
+      <div class="pc">
+        <span class="ptag">Frontend · HTML / CSS / JS</span>
+        <h3 class="pname">Subscription Page UI</h3>
+        <p class="pdesc">A responsive subscription/pricing UI built from scratch. Clean layout with interactive JavaScript elements — demonstrating breadth beyond data work into frontend development. Built in pure HTML, CSS, and vanilla JS.</p>
+        <div class="ptech"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+        <a href="https://github.com/sethu-lgtm/subscription" target="_blank" class="plink">View on GitHub <span>↗</span></a>
+      </div>
+
+      <div class="pc">
+        <span class="ptag">Dataset · Open Data</span>
+        <h3 class="pname">Zepto Product Dataset (CSV)</h3>
+        <p class="pdesc">Curated and published the Zepto product CSV used across my SQL analysis projects. A clean, structured dataset enabling product pricing, category, and discount research for quick-commerce analysis.</p>
+        <div class="ptech"><span class="chip">CSV</span><span class="chip">Data Curation</span><span class="chip">Open Source</span></div>
+        <a href="https://github.com/sethu-lgtm/zepto_product.csv" target="_blank" class="plink">View on GitHub <span>↗</span></a>
+      </div>
+
+      <div class="pc" style="border:1px dashed rgba(240,165,0,.2);">
+        <span class="ptag" style="color:var(--teal);">In Progress · AI Platform</span>
+        <h3 class="pname">AutoAnalyst AI</h3>
+        <p class="pdesc">One-click automated analytics platform — upload data, describe a business problem, get full pipeline: cleaning, SQL analysis, visualizations, and AI-generated insights. Targeting Indian SMEs. Currently in active development.</p>
+        <div class="ptech"><span class="chip">React</span><span class="chip">FastAPI</span><span class="chip">DuckDB</span><span class="chip">Claude API</span></div>
+        <span class="plink" style="color:rgba(45,212,191,.45); cursor:default; pointer-events:none;">Coming Soon</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE — Self-taught journey -->
+<section id="experience">
+  <div class="si">
+    <div class="sh reveal"><span class="snum">03</span><h2 class="stitle">My Journey</h2><div class="sline"></div></div>
+    <div class="el">
+
+      <div class="ei reveal">
+        <div class="ed">2025 — Present</div>
+        <div class="ediv"></div>
+        <div class="eb">
+          <div class="er">AI Analytics Builder</div>
+          <div class="ec">Independent · Self-Directed</div>
+          <ul class="ebull">
+            <li>Designing and building AutoAnalyst — an AI-powered one-click analytics platform</li>
+            <li>Learning full-stack development: React, FastAPI, DuckDB, and Claude API integration</li>
+            <li>Exploring LLM-driven SQL generation, automated EDA, and AI narrative reporting</li>
+            <li>Targeting the Indian SME market with a phased 10-week build roadmap</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ei reveal">
+        <div class="ed">2024 — 2025</div>
+        <div class="ediv"></div>
+        <div class="eb">
+          <div class="er">Self-Taught Data Analyst</div>
+          <div class="ec">Personal Projects · GitHub</div>
+          <ul class="ebull">
+            <li>Built and published 5 independent projects on GitHub — SQL, Python EDA, ML, and frontend</li>
+            <li>Completed Zepto SQL analysis: pricing, discount segmentation, and category breakdowns</li>
+            <li>Developed gender prediction model handling real Indian name ambiguity</li>
+            <li>Practised systematic cleaning: missing value treatment, outlier detection, type normalisation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ei reveal">
+        <div class="ed">2023 — 2024</div>
+        <div class="ediv"></div>
+        <div class="eb">
+          <div class="er">Building Foundations</div>
+          <div class="ec">Online Courses &amp; Self-Study</div>
+          <ul class="ebull">
+            <li>Learned Python fundamentals: data structures, functions, file handling, and OOP</li>
+            <li>Studied SQL from scratch — joins, aggregations, subqueries, and grouping</li>
+            <li>Explored Pandas, NumPy, Matplotlib, and Seaborn for data work</li>
+            <li>Built first HTML/CSS/JS projects to understand the web development layer</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="tools">
+  <div class="si">
+    <div class="sh reveal"><span class="snum">04</span><h2 class="stitle">Stack</h2><div class="sline"></div></div>
+    <div class="tgrid reveal">
+      <div class="tc"><div class="ti">🐍</div><div class="tn">Python</div><div class="tcat">Core Language</div></div>
+      <div class="tc"><div class="ti">🗄</div><div class="tn">SQL / MySQL</div><div class="tcat">Databases</div></div>
+      <div class="tc"><div class="ti">🐼</div><div class="tn">Pandas</div><div class="tcat">Data Wrangling</div></div>
+      <div class="tc"><div class="ti">🔢</div><div class="tn">NumPy</div><div class="tcat">Numerics</div></div>
+      <div class="tc"><div class="ti">📊</div><div class="tn">Matplotlib</div><div class="tcat">Visualisation</div></div>
+      <div class="tc"><div class="ti">📈</div><div class="tn">Seaborn</div><div class="tcat">Statistical Plots</div></div>
+      <div class="tc"><div class="ti">📓</div><div class="tn">Jupyter</div><div class="tcat">Notebooks</div></div>
+      <div class="tc"><div class="ti">🌐</div><div class="tn">HTML / CSS / JS</div><div class="tcat">Frontend</div></div>
+      <div class="tc"><div class="ti">⚛</div><div class="tn">React (Learning)</div><div class="tcat">UI Framework</div></div>
+      <div class="tc"><div class="ti">⚡</div><div class="tn">FastAPI (Learning)</div><div class="tcat">Backend</div></div>
+      <div class="tc"><div class="ti">🦆</div><div class="tn">DuckDB (Learning)</div><div class="tcat">Analytics DB</div></div>
+      <div class="tc"><div class="ti">🤖</div><div class="tn">Claude API</div><div class="tcat">AI Integration</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="ci">
+    <div class="reveal">
+      <h2 class="ch">Let's build something <em>together</em></h2>
+      <p class="csub">Open to data analyst roles, freelance projects, and collaborations. Always happy to talk data, Python, SQL, or building products from scratch.</p>
+      <div class="cls">
+        <a href="https://www.linkedin.com/in/sethu-755185217" target="_blank" class="cl">
+          <span class="cli">in</span><span class="clt">linkedin.com/in/sethu-755185217</span>
+        </a>
+        <a href="https://github.com/sethu-lgtm" target="_blank" class="cl">
+          <span class="cli">gh</span><span class="clt">github.com/sethu-lgtm</span>
+        </a>
+        <a href="mailto:sethu@example.com" class="cl">
+          <span class="cli">@</span><span class="clt">sethumadhav884@gmail.com &nbsp;·&nbsp;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="cform reveal">
+      <div class="frow">
+        <div class="ff"><label>Name</label><input type="text" placeholder="Your name" /></div>
+        <div class="ff"><label>Email</label><input type="email" placeholder="your@email.com" /></div>
+      </div>
+      <div class="ff"><label>Subject</label><input type="text" placeholder="What's this about?" /></div>
+      <div class="ff"><label>Message</label><textarea placeholder="Tell me about your project or idea..."></textarea></div>
+      <button class="fsub" onclick="this.textContent='Sent ✓'; this.style.background='#2dd4bf'; this.disabled=true;">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="fcopy">© 2025 Sethu Madhav · vijayawada, India</span>
+  <span class="ftag">Data Analyst · AI Builder · Self-Taught</span>
+</footer>
+
+<script>
+  const dot=document.getElementById('cdot'), ring=document.getElementById('cring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  (function a(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{dot.style.width='12px';dot.style.height='12px';ring.style.width='50px';ring.style.height='50px';});
+    el.addEventListener('mouseleave',()=>{dot.style.width='7px';dot.style.height='7px';ring.style.width='34px';ring.style.height='34px';});
+  });
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  const bobs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.style.transform=`scaleX(${x.target.dataset.w})`;x.target.classList.add('on');bobs.unobserve(x.target);}});},{threshold:.5});
+  document.querySelectorAll('.bf').forEach(b=>bobs.observe(b));
+</script>
+</body>
+</html>
